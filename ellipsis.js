@@ -200,7 +200,8 @@
     },
     simpleText: function(element){
       var childText = element.childNodes[0].nodeValue;
-      while(this.prop.height > (this.prop.lineheight * this.lines.current)){
+      var infiniteLoopBuster = 0;
+      while(this.prop.height > (this.prop.lineheight * this.lines.current) && infiniteLoopBuster++ < 500){
         element.childNodes[0].nodeValue = childText.slice(0, -1);
         childText = element.childNodes[0].nodeValue;
       }
@@ -252,7 +253,9 @@
           if(domChildren[i].nodeType === 3){
             domChildren[i].nodeValue = displayOrigin;
             childText = domChildren[i].nodeValue;
-            while(this.prop.height > (this.prop.lineheight * this.lines.current)){
+
+            var infiniteLoopBuster = 0;
+            while(this.prop.height > (this.prop.lineheight * this.lines.current) && infiniteLoopBuster++ < 500){
               domChildren[i].nodeValue = childText.slice(0, -1);
               childText = domChildren[i].nodeValue;
             }
@@ -283,7 +286,9 @@
           } else {
             domChildren[i].style.display = displayOrigin;
             childText = domChildren[i].innerText;
-            while(this.prop.height > (this.prop.lineheight * this.lines.current)){
+
+            var infiniteLoopBuster = 0;
+            while(this.prop.height > (this.prop.lineheight * this.lines.current) && infiniteLoopBuster++ < 500){
               domChildren[i].innerText = childText.slice(0, -1);
               childText = domChildren[i].innerText;
             }
